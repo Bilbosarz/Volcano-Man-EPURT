@@ -154,5 +154,57 @@
   }, { threshold:0.2 });
   faders.forEach(f => observer.observe(f));
 </script>
+  <script>
+  // Preload hero images
+  const heroImages = ["hero.png","hero1.png","hero3.png"];
+  let loadedCount = 0;
+
+  heroImages.forEach(src => {
+    const img = new Image();
+    img.src = src;
+    img.onload = () => {
+      loadedCount++;
+      if(loadedCount === heroImages.length) {
+        // All images loaded, start slideshow
+        startHeroSlideshow();
+      }
+    };
+  });
+
+  // Slideshow function
+  function startHeroSlideshow() {
+    const slides = [
+      document.getElementById("heroSlide1"),
+      document.getElementById("heroSlide2"),
+      document.getElementById("heroSlide3")
+    ];
+    let current = 0;
+    slides.forEach(s => s.classList.remove("active"));
+    slides[0].classList.add("active");
+
+    setInterval(() => {
+      slides.forEach(s => s.classList.remove("active"));
+      slides[current].classList.add("active");
+      current = (current + 1) % slides.length;
+    }, 5000);
+  }
+
+  // Parallax on mouse move (optional)
+  window.addEventListener('mousemove', e => {
+    const x = (e.clientX/window.innerWidth - 0.5)*10;
+    const y = (e.clientY/window.innerHeight - 0.5)*6;
+    heroImages.forEach((_,i) => {
+      const slide = document.getElementById(`heroSlide${i+1}`);
+      if(slide) slide.style.transform = `translate(${x}px,${y}px) scale(1.03)`;
+    });
+  });
+  window.addEventListener('mouseleave', () => {
+    heroImages.forEach((_,i) => {
+      const slide = document.getElementById(`heroSlide${i+1}`);
+      if(slide) slide.style.transform = '';
+    });
+  });
+</script>
+
 </body>
 </html>
