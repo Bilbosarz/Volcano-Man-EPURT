@@ -4,35 +4,34 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>$ERUPT — Eruption Starts Now</title>
-  <link rel="stylesheet" href="style.css" />
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
   <meta name="theme-color" content="#151515" />
-
   <style>
-    /* HERO STYLING */
+    /* GENERAL STYLES */
     body { margin:0; font-family:'Inter', sans-serif; scroll-behavior: smooth; background:#151515; color:#fff; }
     header.nav { background:#151515; position:sticky; top:0; z-index:1000; }
     .nav-inner { max-width:1200px; margin:auto; display:flex; justify-content:space-between; align-items:center; padding:10px 20px; }
     .nav-links a { color:#fff; margin-left:20px; text-decoration:none; font-weight:600; }
     .nav-toggle { display:none; font-size:24px; background:none; border:none; color:#fff; cursor:pointer; }
+    
+    /* HERO */
     .hero { position:relative; height:600px; overflow:hidden; }
-    .hero-img { width:100%; height:100%; object-fit:cover; position:absolute; top:0; left:0; opacity:0; transition: opacity 1.5s ease-in-out, transform 0.3s ease-out; }
-    .hero-img.active { opacity:1; }
-    .hero-overlay { position:absolute; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.35); }
-    .hero-content { position:absolute; top:50%; left:50%; transform:translate(-50%, -50%); text-align:center; z-index:2; max-width:800px; }
-    .hero-content h1 { font-family:'Montserrat', sans-serif; font-size:3em; margin-bottom:20px; line-height:1.2; }
-    .hero-content .sub { font-size:1.2em; margin-bottom:30px; }
-    .btn { padding:12px 30px; font-weight:700; border-radius:8px; text-decoration:none; margin:5px; display:inline-block; }
+    .hero-img { width:100%; height:100%; object-fit:cover; position:absolute; top:0; left:0; opacity:0; transition: opacity 1.5s ease-in-out, transform 0.3s ease-out; z-index:1; }
+    .hero-img.active { opacity:1; z-index:2; }
+    .hero-overlay { position:absolute; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.35); z-index:1; }
+    .hero-content { position:absolute; top:50%; left:50%; transform:translate(-50%, -50%); text-align:center; z-index:3; max-width:800px; }
+    .hero-content h1 { font-family:'Montserrat', sans-serif; font-size:3em; margin-bottom:20px; line-height:1.2; opacity:0; transform:translateY(20px); transition:opacity 1s ease-out, transform 1s ease-out; }
+    .hero-content p.sub { font-size:1.2em; margin-bottom:30px; opacity:0; transform:translateY(20px); transition:opacity 1s ease-out 0.3s, transform 1s ease-out 0.3s; }
+    .hero-content .btn { padding:12px 30px; font-weight:700; border-radius:8px; text-decoration:none; margin:5px; display:inline-block; }
     .btn.primary { background:#FF5722; color:#fff; }
     .btn.ghost { border:2px solid #FF5722; color:#FF5722; background:transparent; }
-    .quick-links { margin-top:15px; font-size:0.9em; }
+    .quick-links { margin-top:15px; font-size:0.9em; opacity:0; transform:translateY(20px); transition:opacity 1s ease-out 0.6s, transform 1s ease-out 0.6s; }
     .quick-links a { color:#fff; margin:0 5px; }
 
-    /* SECTION STYLING */
+    /* SECTIONS */
     section { padding:80px 20px; max-width:1200px; margin:auto; opacity:0; transform:translateY(30px); transition:opacity 0.8s ease-out, transform 0.8s ease-out; }
     section.visible { opacity:1; transform:translateY(0); }
     h3 { font-family:'Montserrat', sans-serif; font-size:2em; margin-bottom:20px; }
-    .container { display:grid; grid-template-columns:1fr 1fr; gap:40px; align-items:center; }
     .tokens-list li { margin-bottom:15px; }
     .social-grid { display:flex; gap:20px; flex-wrap:wrap; }
     .social-card { background:#222; padding:20px; border-radius:12px; flex:1; text-align:center; color:#fff; text-decoration:none; transition:transform 0.3s; }
@@ -124,38 +123,7 @@
 </main>
 
 <script>
-  // Hero slideshow
-  const slides = [
-    document.getElementById("heroSlide1"),
-    document.getElementById("heroSlide2"),
-    document.getElementById("heroSlide3")
-  ];
-  let current = 0;
-  setInterval(() => {
-    slides.forEach((s,i) => s.classList.remove("active"));
-    slides[current].classList.add("active");
-    current = (current+1)%slides.length;
-  },5000);
-
-  // Parallax
-  window.addEventListener('mousemove', e => {
-    const x = (e.clientX/window.innerWidth - 0.5)*10;
-    const y = (e.clientY/window.innerHeight - 0.5)*6;
-    slides.forEach(s => s.style.transform = `translate(${x}px,${y}px) scale(1.03)`);
-  });
-  window.addEventListener('mouseleave', () => slides.forEach(s=>s.style.transform=''));
-
-  // Fade-in sections
-  const faders = document.querySelectorAll('.fade-in');
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if(entry.isIntersecting) entry.target.classList.add('visible');
-    });
-  }, { threshold:0.2 });
-  faders.forEach(f => observer.observe(f));
-</script>
-  <script>
-  // Preload hero images
+  // PRELOAD HERO IMAGES & SLIDESHOW
   const heroImages = ["hero.png","hero1.png","hero3.png"];
   let loadedCount = 0;
 
@@ -164,14 +132,10 @@
     img.src = src;
     img.onload = () => {
       loadedCount++;
-      if(loadedCount === heroImages.length) {
-        // All images loaded, start slideshow
-        startHeroSlideshow();
-      }
+      if(loadedCount === heroImages.length) startHeroSlideshow();
     };
   });
 
-  // Slideshow function
   function startHeroSlideshow() {
     const slides = [
       document.getElementById("heroSlide1"),
@@ -185,11 +149,11 @@
     setInterval(() => {
       slides.forEach(s => s.classList.remove("active"));
       slides[current].classList.add("active");
-      current = (current + 1) % slides.length;
-    }, 5000);
+      current = (current+1)%slides.length;
+    },5000);
   }
 
-  // Parallax on mouse move (optional)
+  // HERO PARALLAX
   window.addEventListener('mousemove', e => {
     const x = (e.clientX/window.innerWidth - 0.5)*10;
     const y = (e.clientY/window.innerHeight - 0.5)*6;
@@ -204,6 +168,15 @@
       if(slide) slide.style.transform = '';
     });
   });
+
+  // FADE-IN SECTIONS ON SCROLL
+  const faders = document.querySelectorAll('.fade-in, .hero-content h1, .hero-content .sub, .quick-links');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting) entry.target.classList.add('visible');
+    });
+  }, { threshold:0.2 });
+  faders.forEach(f => observer.observe(f));
 </script>
 
 </body>
