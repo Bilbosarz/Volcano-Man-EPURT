@@ -3,181 +3,160 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>$ERUPT — Eruption Starts Now</title>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-  <meta name="theme-color" content="#151515" />
-  <style>
-    /* GENERAL STYLES */
-    body { margin:0; font-family:'Inter', sans-serif; scroll-behavior: smooth; background:#151515; color:#fff; }
-    header.nav { background:#151515; position:sticky; top:0; z-index:1000; }
-    .nav-inner { max-width:1200px; margin:auto; display:flex; justify-content:space-between; align-items:center; padding:10px 20px; }
-    .nav-links a { color:#fff; margin-left:20px; text-decoration:none; font-weight:600; }
-    .nav-toggle { display:none; font-size:24px; background:none; border:none; color:#fff; cursor:pointer; }
-    
-    /* HERO */
-    .hero { position:relative; height:600px; overflow:hidden; }
-    .hero-img { width:100%; height:100%; object-fit:cover; position:absolute; top:0; left:0; opacity:0; transition: opacity 1.5s ease-in-out, transform 0.3s ease-out; z-index:1; }
-    .hero-img.active { opacity:1; z-index:2; }
-    .hero-overlay { position:absolute; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.35); z-index:1; }
-    .hero-content { position:absolute; top:50%; left:50%; transform:translate(-50%, -50%); text-align:center; z-index:3; max-width:800px; }
-    .hero-content h1 { font-family:'Montserrat', sans-serif; font-size:3em; margin-bottom:20px; line-height:1.2; opacity:0; transform:translateY(20px); transition:opacity 1s ease-out, transform 1s ease-out; }
-    .hero-content p.sub { font-size:1.2em; margin-bottom:30px; opacity:0; transform:translateY(20px); transition:opacity 1s ease-out 0.3s, transform 1s ease-out 0.3s; }
-    .hero-content .btn { padding:12px 30px; font-weight:700; border-radius:8px; text-decoration:none; margin:5px; display:inline-block; }
-    .btn.primary { background:#FF5722; color:#fff; }
-    .btn.ghost { border:2px solid #FF5722; color:#FF5722; background:transparent; }
-    .quick-links { margin-top:15px; font-size:0.9em; opacity:0; transform:translateY(20px); transition:opacity 1s ease-out 0.6s, transform 1s ease-out 0.6s; }
-    .quick-links a { color:#fff; margin:0 5px; }
-
-    /* SECTIONS */
-    section { padding:80px 20px; max-width:1200px; margin:auto; opacity:0; transform:translateY(30px); transition:opacity 0.8s ease-out, transform 0.8s ease-out; }
-    section.visible { opacity:1; transform:translateY(0); }
-    h3 { font-family:'Montserrat', sans-serif; font-size:2em; margin-bottom:20px; }
-    .tokens-list li { margin-bottom:15px; }
-    .social-grid { display:flex; gap:20px; flex-wrap:wrap; }
-    .social-card { background:#222; padding:20px; border-radius:12px; flex:1; text-align:center; color:#fff; text-decoration:none; transition:transform 0.3s; }
-    .social-card:hover { transform:translateY(-5px); }
-    footer.site-footer { background:#111; padding:20px; text-align:center; font-size:0.9em; }
-    .hero-content .btn:hover { transform:scale(1.05); transition:0.3s; }
-  </style>
+  <title>$ERUPT — Ride the Lava, Ride $ERUPT</title>
+  <meta name="description" content="ERUPT — A premium memecoin landing page. Solana’s sleeping. Volcano Man’s awake. Join the eruption." />
+  <link rel="stylesheet" href="styles.css" />
+  <!-- Preload hero images for smooth slideshow -->
+  <link rel="preload" as="image" href="/images/hero.png" />
+  <link rel="preload" as="image" href="/images/hero1.png" />
+  <link rel="preload" as="image" href="/images/hero3.png" />
 </head>
 <body>
-
-<header class="nav">
-  <div class="nav-inner">
-    <div class="brand">
-      <img src="3.png" alt="ERUPT icon" class="logo" style="height:50px;" />
-      <span class="brand-name">$ERUPT</span>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="#">
+        <img src="/images/logo.png" alt="$ERUPT logo" class="brand-logo" />
+        <span class="brand-name">$ERUPT</span>
+      </a>
+      <nav class="top-nav" aria-label="Top navigation">
+        <a href="https://discord.gg/" target="_blank" rel="noopener" class="nav-link">Discord</a>
+        <a href="https://x.com/kalleicey1" target="_blank" rel="noopener" class="nav-link">X</a>
+        <a href="https://pump.fun" target="_blank" rel="noopener" class="nav-link cta">Buy $ERUPT</a>
+      </nav>
     </div>
-    <nav class="nav-links">
-      <a href="#about">About</a>
-      <a href="#tokenomics">Tokenomics</a>
-      <a href="#community">Community</a>
-      <a class="cta" href="https://pump.fun" target="_blank" rel="noopener">Buy $ERUPT</a>
-    </nav>
-    <button class="nav-toggle" aria-label="Toggle menu">☰</button>
-  </div>
-</header>
+  </header>
 
-<main>
-  <!-- HERO -->
-  <section class="hero" id="home" aria-label="Hero">
-    <img src="hero.png" alt="$ERUPT hero artwork" class="hero-img active" id="heroSlide1" />
-    <img src="hero1.png" alt="$ERUPT hero artwork" class="hero-img" id="heroSlide2" />
-    <img src="hero3.png" alt="$ERUPT hero artwork" class="hero-img" id="heroSlide3" />
-    <div class="hero-overlay"></div>
-    <div class="hero-content">
-      <h1>ERUPTION IMMINENT — Ride the Lava, Ride $ERUPT</h1>
-      <p class="sub">Solana’s sleeping. Volcano Man’s awake. Join the movement that turns charts into molten gold.</p>
-      <div class="hero-cta">
-        <a class="btn primary" href="https://pump.fun" target="_blank" rel="noopener">Buy $ERUPT</a>
-        <a class="btn ghost" href="#tokenomics">Tokenomics</a>
+  <main>
+    <section class="hero" id="hero" aria-label="Hero">
+      <div class="hero-slideshow" id="heroSlideshow" aria-hidden="false">
+        <!-- Slides are created by JS, markup here is fallback -->
+        <div class="hero-slide" data-src="/images/hero.png" style="background-image: url('/images/hero.png')"></div>
+        <div class="hero-slide" data-src="/images/hero1.png" style="background-image: url('/images/hero1.png')"></div>
+        <div class="hero-slide" data-src="/images/hero3.png" style="background-image: url('/images/hero3.png')"></div>
       </div>
-      <div class="quick-links">
-        <a href="https://discord.gg/" target="_blank" rel="noopener">Discord</a> •
-        <a href="https://x.com/kalleicey1" target="_blank" rel="noopener">X / Twitter</a> •
-        <a href="https://pump.fun" target="_blank" rel="noopener">Pump.fun</a>
+
+      <!-- Dark overlay for readability -->
+      <div class="hero-overlay"></div>
+
+      <div class="container hero-content">
+        <div class="hero-inner">
+          <h1 class="hero-title">ERUPTION IMMINENT — Ride the Lava, Ride $ERUPT</h1>
+          <p class="hero-sub">Solana’s sleeping. Volcano Man’s awake. Join the movement that turns charts into molten gold.</p>
+
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="https://pump.fun" target="_blank" rel="noopener">Buy $ERUPT</a>
+            <a class="btn btn-ghost" href="#tokenomics">Tokenomics</a>
+          </div>
+
+          <div class="hero-links">
+            <a href="https://discord.gg/" target="_blank" rel="noopener" class="social-link">Discord</a>
+            <a href="https://x.com/kalleicey1" target="_blank" rel="noopener" class="social-link">X</a>
+            <a href="https://pump.fun" target="_blank" rel="noopener" class="social-link">Pump.fun</a>
+          </div>
+        </div>
       </div>
-    </div>
-  </section>
+      <!-- subtle scroll hint -->
+      <a href="#about" class="scroll-hint" aria-label="Scroll to About">▼</a>
+    </section>
 
-  <!-- ABOUT -->
-  <section class="about fade-in" id="about">
-    <h3>About $ERUPT</h3>
-    <p>Solana’s been quiet. Charts dusty. Markets snoozing. Perfect — that’s when Volcano Man wakes. This isn’t a coin to scroll past. This is a spark, a molten surge, a wave built by a team that doesn’t sleep. Lava flows. Charts crack. Memes erupt. $ERUPT isn’t hype. It’s heat.</p>
-  </section>
+    <section id="about" class="section about reveal">
+      <div class="container">
+        <h2 class="section-title">About $ERUPT</h2>
+        <p class="lead">
+          Solana’s been quiet. Charts dusty. Markets snoozing. Perfect — that’s when Volcano Man wakes.
+          This isn’t a coin to scroll past. This is a spark, a molten surge, a wave built by a team that doesn’t sleep.
+          Lava flows. Charts crack. Memes erupt. $ERUPT isn’t hype. It’s heat.
+        </p>
+      </div>
+    </section>
 
-  <!-- TOKENOMICS -->
-  <section class="tokenomics fade-in" id="tokenomics">
-    <h3>Tokenomics</h3>
-    <ul class="tokens-list">
-      <li><strong>Total Supply:</strong> 1,000,000,000 $ERUPT</li>
-      <li><strong>Liquidity Pool (LP):</strong> Locked, multi-sig & transparent</li>
-      <li><strong>Taxes:</strong> 2% buy / 3% sell</li>
-      <li><strong>Utility:</strong> Social rewards, meme competitions, community vault, exclusive drops</li>
-    </ul>
-    <a class="btn primary" href="https://pump.fun" target="_blank">Buy on Pump.fun</a>
-  </section>
+    <section id="tokenomics" class="section tokenomics reveal">
+      <div class="container grid token-grid">
+        <div class="token-card">
+          <h3>Total Supply</h3>
+          <p class="big">1,000,000,000 <span class="muted">$ERUPT</span></p>
+        </div>
+        <div class="token-card">
+          <h3>Liquidity Pool</h3>
+          <p class="muted">Locked, multi-sig, transparent</p>
+        </div>
+        <div class="token-card">
+          <h3>Taxes</h3>
+          <p class="big">2% buy / 3% sell</p>
+        </div>
+        <div class="token-card">
+          <h3>Utility</h3>
+          <ul class="utility-list">
+            <li>Social rewards</li>
+            <li>Meme competitions</li>
+            <li>Community vault</li>
+            <li>Exclusive drops</li>
+          </ul>
+        </div>
+      </div>
 
-  <!-- COMMUNITY -->
-  <section class="community fade-in" id="community">
-    <h3>Community & Socials</h3>
-    <div class="social-grid">
-      <a class="social-card" href="https://discord.gg/" target="_blank">
-        <h4>Discord</h4>
-        <p>Chat, strategy, memeing — real-time community ops.</p>
-      </a>
-      <a class="social-card" href="https://x.com/kalleicey1" target="_blank">
-        <h4>X / Twitter</h4>
-        <p>Announcements, AMAs, meme drops, and hype.</p>
-      </a>
-      <a class="social-card" href="https://pump.fun" target="_blank">
-        <h4>Pump.fun</h4>
-        <p>Primary swap platform presence — buy & swap $ERUPT.</p>
-      </a>
-    </div>
-  </section>
+      <div class="container token-actions">
+        <a class="btn btn-primary large" href="https://pump.fun" target="_blank" rel="noopener">Buy on Pump.fun</a>
+      </div>
+    </section>
+
+    <section id="community" class="section community reveal">
+      <div class="container">
+        <h2 class="section-title">Community & Socials</h2>
+        <p class="lead muted">Join Volcano Man and the community where memes get minted and charts melt upwards.</p>
+
+        <div class="cards grid community-grid">
+          <a class="card" href="https://discord.gg/" target="_blank" rel="noopener">
+            <div class="card-icon">
+              <img src="/images/hero1.png" alt="Discord icon" />
+            </div>
+            <div class="card-body">
+              <h4>Discord</h4>
+              <p>Join the lava pit — real-time chat, giveaways, and community-driven memes.</p>
+            </div>
+          </a>
+
+          <a class="card" href="https://x.com/kalleicey1" target="_blank" rel="noopener">
+            <div class="card-icon">
+              <img src="/images/hero3.png" alt="X icon" />
+            </div>
+            <div class="card-body">
+              <h4>X</h4>
+              <p>Follow announcements, hype posts, and chart updates in bite-sized heat.</p>
+            </div>
+          </a>
+
+          <a class="card" href="https://pump.fun" target="_blank" rel="noopener">
+            <div class="card-icon">
+              <img src="/images/logo.png" alt="Pump.fun icon" />
+            </div>
+            <div class="card-body">
+              <h4>Pump.fun</h4>
+              <p>Direct buy link and liquidity portal — ride the wave where it matters.</p>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
 
   <footer class="site-footer">
-    <div>© <strong>$ERUPT</strong> — Built for the eruption. 2025</div>
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <img src="/images/logo.png" alt="$ERUPT logo" class="footer-logo" />
+        <div>
+          <strong>$ERUPT</strong>
+          <div class="muted">© $ERUPT — Built for the eruption. 2025</div>
+        </div>
+      </div>
+      <nav class="footer-nav" aria-label="Footer links">
+        <a href="#hero" class="muted">Back to top</a>
+        <a href="https://pump.fun" target="_blank" rel="noopener">Buy</a>
+        <a href="https://discord.gg/" target="_blank" rel="noopener">Discord</a>
+      </nav>
+    </div>
   </footer>
-</main>
 
-<script>
-  // PRELOAD HERO IMAGES & SLIDESHOW
-  const heroImages = ["hero.png","hero1.png","hero3.png"];
-  let loadedCount = 0;
-
-  heroImages.forEach(src => {
-    const img = new Image();
-    img.src = src;
-    img.onload = () => {
-      loadedCount++;
-      if(loadedCount === heroImages.length) startHeroSlideshow();
-    };
-  });
-
-  function startHeroSlideshow() {
-    const slides = [
-      document.getElementById("heroSlide1"),
-      document.getElementById("heroSlide2"),
-      document.getElementById("heroSlide3")
-    ];
-    let current = 0;
-    slides.forEach(s => s.classList.remove("active"));
-    slides[0].classList.add("active");
-
-    setInterval(() => {
-      slides.forEach(s => s.classList.remove("active"));
-      slides[current].classList.add("active");
-      current = (current+1)%slides.length;
-    },5000);
-  }
-
-  // HERO PARALLAX
-  window.addEventListener('mousemove', e => {
-    const x = (e.clientX/window.innerWidth - 0.5)*10;
-    const y = (e.clientY/window.innerHeight - 0.5)*6;
-    heroImages.forEach((_,i) => {
-      const slide = document.getElementById(`heroSlide${i+1}`);
-      if(slide) slide.style.transform = `translate(${x}px,${y}px) scale(1.03)`;
-    });
-  });
-  window.addEventListener('mouseleave', () => {
-    heroImages.forEach((_,i) => {
-      const slide = document.getElementById(`heroSlide${i+1}`);
-      if(slide) slide.style.transform = '';
-    });
-  });
-
-  // FADE-IN SECTIONS ON SCROLL
-  const faders = document.querySelectorAll('.fade-in, .hero-content h1, .hero-content .sub, .quick-links');
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if(entry.isIntersecting) entry.target.classList.add('visible');
-    });
-  }, { threshold:0.2 });
-  faders.forEach(f => observer.observe(f));
-</script>
-
+  <script src="script.js"></script>
 </body>
 </html>
