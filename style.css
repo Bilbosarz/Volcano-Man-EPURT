@@ -1,0 +1,240 @@
+/* ===========================
+   GENERAL RESET & BASE
+=========================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: #151515;
+  color: #fff;
+  line-height: 1.6;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* ===========================
+   HEADER / NAVIGATION
+=========================== */
+header.nav {
+  background: #151515;
+  position: sticky;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+.nav-inner {
+  max-width: 1200px;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+}
+
+.nav-links a {
+  margin-left: 20px;
+  font-weight: 600;
+  transition: color 0.3s;
+}
+
+.nav-links a:hover {
+  color: #FF5722;
+}
+
+.nav-toggle {
+  display: none;
+  font-size: 28px;
+  background: none;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+}
+
+/* ===========================
+   HERO SECTION
+=========================== */
+.hero {
+  position: relative;
+  height: 600px;
+  overflow: hidden;
+}
+
+.hero-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  transition: opacity 1.5s ease-in-out, transform 0.3s ease-out;
+}
+
+.hero-img.active {
+  opacity: 1;
+}
+
+.hero-overlay {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.35);
+}
+
+.hero-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  max-width: 800px;
+  z-index: 2;
+}
+
+.hero-content h1 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 3em;
+  line-height: 1.2;
+  margin-bottom: 20px;
+}
+
+.hero-content .sub {
+  font-size: 1.2em;
+  margin-bottom: 30px;
+  color: #ddd;
+}
+
+.hero-cta .btn {
+  margin: 5px;
+  padding: 12px 30px;
+  border-radius: 8px;
+  font-weight: 700;
+  transition: transform 0.3s;
+}
+
+.hero-cta .btn.primary {
+  background: #FF5722;
+  color: #fff;
+}
+
+.hero-cta .btn.ghost {
+  border: 2px solid #FF5722;
+  background: transparent;
+  color: #FF5722;
+}
+
+.hero-cta .btn:hover {
+  transform: scale(1.05);
+}
+
+.quick-links {
+  margin-top: 15px;
+  font-size: 0.9em;
+  color: #ddd;
+}
+
+.quick-links a {
+  margin: 0 5px;
+  transition: color 0.3s;
+}
+
+.quick-links a:hover {
+  color: #FF5722;
+}
+
+/* ===========================
+   SECTIONS
+=========================== */
+section {
+  padding: 80px 20px;
+  max-width: 1200px;
+  margin: auto;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+section.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+h3 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 2em;
+  margin-bottom: 20px;
+  color: #FF5722;
+}
+
+.tokens-list li {
+  margin-bottom: 15px;
+  color: #ddd;
+}
+
+/* ===========================
+   COMMUNITY / SOCIAL CARDS
+=========================== */
+.social-grid {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.social-card {
+  background: #222;
+  padding: 20px;
+  border-radius: 12px;
+  flex: 1;
+  text-align: center;
+  color: #fff;
+  text-decoration: none;
+  transition: transform 0.3s, background 0.3s;
+}
+
+.social-card:hover {
+  transform: translateY(-5px);
+  background: #FF5722;
+  color: #fff;
+}
+
+/* ===========================
+   FOOTER
+=========================== */
+footer.site-footer {
+  background: #111;
+  padding: 20px;
+  text-align: center;
+  font-size: 0.9em;
+  color: #aaa;
+}
+
+/* ===========================
+   RESPONSIVE
+=========================== */
+@media (max-width: 768px) {
+  .nav-links { display: none; flex-direction: column; background:#151515; position:absolute; top:60px; right:20px; border-radius:8px; padding:10px; }
+  .nav-links.open { display:flex; }
+  .nav-toggle { display: block; }
+
+  .container { display: block; }
+}
